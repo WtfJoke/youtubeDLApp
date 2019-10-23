@@ -43,7 +43,11 @@ class MainActivity : AppCompatActivity() {
             getExternalStoragePublicDirectory(DIRECTORY_DOWNLOADS),
             "youtubedl-android"
         )
-        val request = YoutubeDLRequest("https://vimeo.com/22439234")
+        val editableUrl = videoLinkText.text
+        val url =
+            if (editableUrl.isNotEmpty()) editableUrl.toString() else "https://www.youtube.com/watch?v=ARhk9K_mviE"
+
+        val request = YoutubeDLRequest(url)
         request.setOption("-o", youtubeDLDir.absolutePath + "/%(title)s.%(ext)s")
         YoutubeDL.getInstance()
             .execute(request) { progress, etaInSeconds -> println("$progress% (ETA $etaInSeconds seconds)") }
