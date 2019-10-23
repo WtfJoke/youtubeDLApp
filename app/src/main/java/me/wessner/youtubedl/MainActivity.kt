@@ -1,7 +1,7 @@
 package me.wessner.youtubedl
 
-import android.Manifest
-import android.content.pm.PackageManager
+import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+import android.content.pm.PackageManager.PERMISSION_DENIED
 import android.os.Bundle
 import android.os.Environment.DIRECTORY_DOWNLOADS
 import android.os.Environment.getExternalStoragePublicDirectory
@@ -17,7 +17,6 @@ import com.yausername.youtubedl_android.YoutubeDLRequest
 import kotlinx.android.synthetic.main.activity_main.*
 import java.io.File
 
-
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,8 +31,7 @@ class MainActivity : AppCompatActivity() {
 
 
     fun onClickDownload(view: View) {
-        val hasNoStoragePermission = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
-        if (hasNoStoragePermission) {
+        if (hasNoStoragePermission()) {
             askForStoragePermission()
             return
         }
@@ -57,8 +55,13 @@ class MainActivity : AppCompatActivity() {
         Toast.makeText(this, "Need write access to storage for Download", Toast.LENGTH_LONG).show()
         ActivityCompat.requestPermissions(
             this,
-            arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+            arrayOf(WRITE_EXTERNAL_STORAGE),
             100 // TODO replace this
         )
+    }
+
+    private fun hasNoStoragePermission(): Boolean {
+        val storagePermission = ContextCompat.checkSelfPermission(this, WRITE_EXTERNAL_STORAGE)
+        return storagePermission == PERMISSION_DENIED
     }
 }
