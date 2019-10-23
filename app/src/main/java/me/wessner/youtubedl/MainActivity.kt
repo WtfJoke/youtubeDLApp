@@ -15,6 +15,10 @@ import com.yausername.youtubedl_android.YoutubeDL
 import com.yausername.youtubedl_android.YoutubeDLException
 import com.yausername.youtubedl_android.YoutubeDLRequest
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.io.File
 
 class MainActivity : AppCompatActivity() {
@@ -47,9 +51,20 @@ class MainActivity : AppCompatActivity() {
 
         val request = YoutubeDLRequest(url)
         request.setOption("-o", youtubeDLDir.absolutePath + "/%(title)s.%(ext)s")
-        YoutubeDL.getInstance()
-            .execute(request) { progress, etaInSeconds -> println("$progress% (ETA $etaInSeconds seconds)") }
+        GlobalScope.launch { execute(request) }
     }
+
+    private suspend fun execute(request: YoutubeDLRequest) =
+        withContext(Dispatchers.IO) {
+            YoutubeDL.getInstance()
+                .execute(request) { progress, etaInSeconds ->
+                    Log.d(
+                        "YTDL",
+                        "$progress% (ETA $etaInSeconds seconds)"
+                    )
+                }
+        }
+
 
     private fun askForStoragePermission() {
         Toast.makeText(this, "Need write access to storage for Download", Toast.LENGTH_LONG).show()
