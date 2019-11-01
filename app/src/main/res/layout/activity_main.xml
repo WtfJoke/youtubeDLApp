@@ -28,7 +28,7 @@
         android:layout_marginBottom="280dp"
 
         android:onClick="onClickDownload"
-        android:text="Download"
+        android:text="@string/download"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintLeft_toLeftOf="parent"

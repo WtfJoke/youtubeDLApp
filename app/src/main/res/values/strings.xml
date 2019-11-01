@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">YoutubeDL</string>
+    <string name="download">Download</string>
+    <string name="video_library">Library</string>
 </resources>
