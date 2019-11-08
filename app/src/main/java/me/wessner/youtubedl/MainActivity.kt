@@ -45,9 +45,8 @@ class MainActivity : AppCompatActivity() {
             getExternalStoragePublicDirectory(DIRECTORY_DOWNLOADS),
             "youtubedl-android"
         )
-        val editableUrl = videoLinkText.text
-        val url =
-            if (editableUrl.isNotEmpty()) editableUrl.toString() else "https://www.youtube.com/watch?v=ARhk9K_mviE"
+        val editableUrl = videoLinkText.text.toString()
+        val url = editableUrl.ifBlank { getString(R.string.sample_link) }
 
         val request = YoutubeDLRequest(url)
         request.setOption("-o", youtubeDLDir.absolutePath + "/%(title)s.%(ext)s")
