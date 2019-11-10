@@ -41,12 +41,12 @@ class HomeFragment : Fragment() {
         homeViewModel.text.observe(this, Observer {
             textView.text = it
         })
-        root.downloadFAB.setOnClickListener { onClickDownload(it) }
+        root.downloadFAB.setOnClickListener { onClickDownload() }
 
         return root
     }
 
-    private fun onClickDownload(view: View) {
+    private fun onClickDownload() {
         if (hasNoStoragePermission()) {
             askForStoragePermission()
             return
@@ -57,7 +57,7 @@ class HomeFragment : Fragment() {
             Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),
             "youtubedl-android"
         )
-        val editableUrl = view.rootView.videoLinkText.text.toString()
+        val editableUrl = videoLinkText.text.toString()
         val url = editableUrl.ifBlank { getString(R.string.sample_link) }
 
         val request = YoutubeDLRequest(url)
