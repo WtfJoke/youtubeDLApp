@@ -4,4 +4,10 @@
     <string name="video_library">Bibliothek</string>
     <string name="settings">Einstellungen</string>
     <string name="sample_link">https://www.youtube.com/watch?v=dQw4w9WgXcQ</string>
+    <!-- Preference Titles -->
+    <string name="download_location_title">Speicherort</string>
+
+    <!-- General Preferences -->
+    <string name="general_header">Allgemein</string>
+    <string name="quality_title">Qualität</string>
 </resources>

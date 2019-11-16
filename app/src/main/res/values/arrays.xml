@@ -1,0 +1,18 @@
+<resources>
+    <!-- Quality Preference -->
+    <string-array name="quality_entries">
+        <item>Automatic</item>
+        <item>Best</item>
+        <item>720p</item>
+        <item>480p</item>
+        <item>240p</item>
+    </string-array>
+
+    <string-array name="quality_values">
+        <item>automatic</item>
+        <item>best</item>
+        <item>720p</item>
+        <item>480p</item>
+        <item>240p</item>
+    </string-array>
+</resources>
